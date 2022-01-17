@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "E-Dnevnik";
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <a href="@Url.Action("Index", "Kupac")">
+                <img src="@Url.Content("~/Content/Images/Users.png")" />
+            </a>
+            <div class="li-text">
+                <h3 class="li-head">Kupci</h3>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a href="@Url.Action("Index", "Umjetnik")">
+                <img src="@Url.Content("~/Content/Images/Umjetnik.png")" />
+            </a>
+            <div class="li-text">
+                <h3 class="li-head">Umjetnici</h3>
+            </div>
+        </div>
+
+        <div class="thumbnail">
+            <a href="@Url.Action("Index", "Umjetnina")">
+                <img src="@Url.Content("~/Content/Images/Umjetnina.png")" />
+            </a>
+            <div class="li-text">
+                <h3 class="li-head">Umjetnine</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <a href="@Url.Action("Index", "Tip")">
+                <img src="@Url.Content("~/Content/Images/Tip.png")" />
+            </a>
+            <div class="li-text">
+                <h3 class="li-head">Tipovi umjetnine</h3>
+            </div>
+        </div>
+
+        <div class="thumbnail">
+            <a href="@Url.Action("Index", "Izlozba")">
+                <img src="@Url.Content("~/Content/Images/Izlozba.png")" />
+            </a>
+            <div class="li-text">
+                <h3 class="li-head">Izložbe</h3>
+            </div>
+        </div>
+        </div>
+    </div>

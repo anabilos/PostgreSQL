@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MVCGU.Models.MvcUmjetnina>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Umjetnine</h2>
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Umjetnina")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idUmjetnina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Godina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slika)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dimenzije)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cijena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idTip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idUmjetnik)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idUmjetnina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Godina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slika)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dimenzije)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idTip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idUmjetnik)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Umjetnina", new { idUmjetnina = item.idUmjetnina})" class="btn btn-default"><i class="fa fa-pencil"></i>Edit</a>
+                <a onclick="Delete(@item.idUmjetnina)" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<input type='button' onclick='history.go(-1);' value="Nazad" style="float: right" class="btn button" ; />
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(idUmjetnina) {
+
+            alertify.confirm('Message','Jeste sigurni da želite obrisat ovaj podatak ?',function(){
+                window.location.href  = '@Url.Action("Delete","Umjetnina")/'+idUmjetnina;
+            },null );
+        }
+    </script>
+}

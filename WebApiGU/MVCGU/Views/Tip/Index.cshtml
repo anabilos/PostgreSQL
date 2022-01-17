@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MVCGU.Models.MvcTip>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipovi umjetnina</h2>
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Tip")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idTip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idTip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Tip", new { idTip = item.idTip})" class="btn btn-default"><i class="fa fa-pencil"></i>Edit</a>
+                <a onclick="Delete(@item.idTip)" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<input type='button' onclick='history.go(-1);' value="Nazad" style="float: right" class="btn button" ; />
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(idTip) {
+
+            alertify.confirm('Message','Jeste sigurni da želite obrisat ovaj podatak ?',function(){
+                window.location.href  = '@Url.Action("Delete","Tip")/'+idTip;
+            },null );
+        }
+    </script>
+}

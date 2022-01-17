@@ -1,0 +1,98 @@
+﻿@model MVCGU.Models.MvcUmjetnina
+
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+
+<h2></h2>
+
+
+@Html.ValidationSummary(true)
+
+<h1></h1>
+<div class="panel panel-default">
+    <div class="form-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.idUmjetnina)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Naziv)
+                @Html.EditorFor(model => model.Naziv)
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Opis)
+                @Html.TextAreaFor(model => model.Opis, new { cols = 30, rows = 10 })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Godina)
+                @Html.EditorFor(m => Model.Godina, new { htmlAttributes = new { min = 0, max = 2022 } })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Slika)
+                @Html.EditorFor(model => model.Slika)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Dimenzije)
+                @Html.EditorFor(model => model.Dimenzije)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cijena)
+                @Html.EditorFor(model => model.Cijena)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idUmjetnik, "Umjetnik")
+                <br />
+                @Html.DropDownList("idUmjetnik", (IEnumerable<SelectListItem>)ViewBag.listaUmjetnika, "-- - Odaberi umjetnika-- - ")
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idTip, "Tip umjetnine")
+                <br />
+                @Html.DropDownList("idTip", (IEnumerable<SelectListItem>)ViewBag.listaTipova, "-- - Odaberi tip umjetnine-- - ")
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn button" />
+                <input type="reset" value="Reset" class="btn button" />
+            </div>
+        }
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    $('input[type=datetime]').datepicker({
+                        dateFormat: "dd/M/yy",
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: "-60:+0"
+                    });
+
+                });
+
+               $(function () {
+                    var successMessage = '@TempData["SuccessMessage"]'
+                    if (successMessage != '')
+                    alertify.success(successMessage);
+               });
+    </script>
+}

@@ -1,0 +1,76 @@
+﻿@model MVCGU.Models.MvcUmjetnik
+
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+@Html.ValidationSummary(true)
+
+<h1></h1>
+<div class="panel panel-default">
+    <div class="form-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.idUmjetnik)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ime)
+                @Html.EditorFor(model => model.Ime)
+               
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prezime)
+                @Html.EditorFor(model => model.Prezime)
+               
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Datum_rođenja)
+                @Html.EditorFor(model => model.Datum_rođenja, new { htmlAttributes = new { @class = "form-control", placeholder = "Datum rođenja" } })
+               
+
+               
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idMjesto, "Mjesto")
+                <br />
+                @Html.DropDownList("idMjesto", (IEnumerable<SelectListItem>)ViewBag.listaMjesta , "-- - Odaberi mjesto-- - " )
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn button" />
+                <input type="reset" value="Reset" class="btn button" />
+            </div>
+        }
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    $('input[type=datetime]').datepicker({
+                        dateFormat: "dd/M/yy",
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: "-60:+0"
+                    });
+
+                });
+
+               $(function () {
+                    var successMessage = '@TempData["SuccessMessage"]'
+                    if (successMessage != '')
+                    alertify.success(successMessage);
+               });
+    </script>
+    }

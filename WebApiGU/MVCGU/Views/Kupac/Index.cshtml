@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MVCGU.Models.MvcKupac>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Kupci</h2>
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Kupac")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Broj_telefona)
+            </th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Broj_telefona)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Kupac", new { idKupac = item.idKupac})" class="btn btn-default"><i class="fa fa-pencil"></i>Edit</a>
+                <a onclick="Delete(@item.idKupac)" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+<input type='button' onclick='history.go(-1);' value="Nazad" style="float: right" class="btn button" ; />
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(idKupac) {
+
+            alertify.confirm('Message','Jeste sigurni da želite obrisat ovaj podatak ?',function(){
+                window.location.href  = '@Url.Action("Delete","Kupac")/'+idKupac;
+            },null );
+        }
+    </script>
+}

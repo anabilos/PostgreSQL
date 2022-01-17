@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MVCGU.Models.MvcIzlozba>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Izložbe</h2>
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Izlozba")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum_početka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum_završetka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prostor_održavanja)
+            </th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum_početka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum_završetka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prostor_održavanja)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Izlozba", new { idIzložba = item.idIzložba})" class="btn btn-default"><i class="fa fa-pencil"></i>Edit</a>
+                <a onclick="Delete(@item.idIzložba)" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+<input type='button' onclick='history.go(-1);' value="Nazad" style="float: right" class="btn button" ; />
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(idIzložba) {
+
+            alertify.confirm('Message','Jeste sigurni da želite obrisat ovaj podatak ?',function(){
+                window.location.href  = '@Url.Action("Delete","Izlozba")/'+idIzložba;
+            },null );
+        }
+    </script>
+}
